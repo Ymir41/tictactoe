@@ -108,8 +108,8 @@ void game(bool single_player)
     //ending game--------------------------------------------------------------------------------------
     for(int j=0; j<8; j++){
       int state = paths[j].state();
-      if (state==3) {runing = 0; mvprintw(19, 0, "Cross won!"); break;} // someone won
-      if (state==-3) {runing = 0; mvprintw(19, 0, "Circle won!"); break;} // someone won
+      if (state==3) {runing = 0; mvprintw(20, 0, "Cross won! Press any key to continue..."); break;} // someone won
+      if (state==-3) {runing = 0; mvprintw(20, 0, "Circle won! Press any key to continue..."); break;} // someone won
     }
 
 
@@ -117,7 +117,7 @@ void game(bool single_player)
     for(int i=0; i<9; i++){
      if (board[i] == 0) free_fields++;
     }
-    if (free_fields==0) {mvprintw(19, 0, "Remis!   "); runing =0;}
+    if (free_fields==0) {mvprintw(20, 0, "Remis! Press any key to continue..."); runing =0;}
   }// game loop
 }// game function
 
@@ -150,7 +150,7 @@ int ask_player(int * board, const char * question){
   mvprintw(18, 0, "           ");
   mvprintw(19, 7, "  ");
   while (true){
-    mvprintw(19, 0, question);
+    mvprintw(19, 0, "%s", question);
     out = getch()-49;
     if (out >= 0 && out <= 8 && board[out] == 0) return out;
     else mvprintw(18, 0, "Wrong value");
