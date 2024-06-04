@@ -48,13 +48,12 @@ int main()
   {
     refresh();
     clear();
-    mvprintw(0,0, "Menu:\n------------------------\n1. Dwie osoby\n2. Gracz kontra komputer\n3. Wyjdź\nWybór: ");
+    mvprintw(0,0, "Menu:\n------------------------\n1. Dwie osoby\n2. Wyjdź\nWybór: ");
 
     switch(wgetch(stdscr))
     {
       case '1': game(false); break;
-      case '2': game(true); break;
-      case '3': endwin(); return 0;
+      case '2': endwin(); return 0;
       default: printw("Nie ma takiej opcji w menu\n");
     }
 
