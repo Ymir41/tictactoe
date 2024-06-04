@@ -48,13 +48,13 @@ int main()
   {
     refresh();
     clear();
-    mvprintw(0,0, "Menu:\n------------------------\n1. Dwie osoby\n2. Wyjdź\nWybór: ");
+    mvprintw(0,0, "Menu:\n------------------------\n1. Two players\n2. Exit\nSelection: ");
 
     switch(wgetch(stdscr))
     {
       case '1': game(false); break;
       case '2': endwin(); return 0;
-      default: printw("Nie ma takiej opcji w menu\n");
+      default: printw("Wrong option\n");
     }
 
 
@@ -76,11 +76,11 @@ void game(bool single_player)
       board[i] = 0;
   }
 
-  const char * pusta = "           |           |           \n";
-  const char * pelny = "-----------+-----------+-----------\n";
+  const char * empty_line = "           |           |           \n";
+  const char * full_line = "-----------+-----------+-----------\n";
   for (int i = 1; i<=17; i++) {
-    if (i%6==0) mvprintw(i-1, 0, pelny);
-    else mvprintw(i-1, 0, pusta);
+    if (i%6==0) mvprintw(i-1, 0, "%s", full_line);
+    else mvprintw(i-1, 0, "%s", empty_line);
   }
   
 
@@ -96,7 +96,9 @@ void game(bool single_player)
   paths[7].init(board, 2, 4, 6);
   int free_fields = 0;
 
-  //game loop-------------------------------------------------------------------------------------------
+  //Clue how to play-----------------------------------------------------------------------------------
+  printw("To select segment enter number (1-9).");
+  //game loop------------------------------------------------------------------------------------------
   bool runing=1;
   for (int i = 0; runing; i++){
     //asking players-----------------------------------------------------------------------------------
@@ -153,14 +155,4 @@ int ask_player(int * board, const char * question){
     if (out >= 0 && out <= 8 && board[out] == 0) return out;
     else mvprintw(18, 0, "Wrong value");
  }
-}
-
-int ask_computer(Path * paths){
-  for(int i = 0; i<8; i++){
-    if (paths[i].state()==-2) return paths[i].free_field();
-  }
-  for(int i = 0; i<8; i++){
-    if (paths[i].state()== 2) return paths[i].free_field();
-  }
-  return 0;
 }
